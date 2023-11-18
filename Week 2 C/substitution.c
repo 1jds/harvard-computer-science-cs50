@@ -2,12 +2,15 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#include <strings.h>
 
 int check_argument_is_alphabetic(string argument1);
 int check_argument_letters_not_doubled(string argument1);
-char alphabet[27] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '\0'};
-char key_sequence[27];
+void ciphered_text(string plaintext, string argument1);
+
+const char alphabet[27] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                           'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '\0'};
+const char alphabet_capitals[27] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                                    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '\0'};
 
 int main(int argc, string argv[])
 {
@@ -29,17 +32,27 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    int is_argument_alphabetic = check_argument_is_alphabetic(argv[1]); // If user's argument contains anything except upper or lowercase letters
+    int is_argument_alphabetic =
+        check_argument_is_alphabetic(argv[1]); // If user's argument contains anything except upper or lowercase letters
     if (is_argument_alphabetic == 1)
     {
         return 1;
     }
 
-    int is_any_letter_doubled = check_argument_letters_not_doubled(argv[1]); // check that the command-line argument/cipher key contains each letter only once
-
+    int is_any_letter_doubled =
+        check_argument_letters_not_doubled(argv[1]); // check that the CLI argument/cipher key contains each letter only once
+    if (is_any_letter_doubled == 1)
+    {
+        return 1;
+    }
 
     // prompt user for plaintext
     string plaintext = get_string("plaintext:  ");
+
+    // display ciphered text
+    printf("ciphertext: ");
+    ciphered_text(plaintext, argv[1]); // pass plaintext to this function to cipher and print it
+    printf("\n");
 
     return 0;
 }
@@ -67,120 +80,79 @@ int check_argument_is_alphabetic(string argument1)
 
 int check_argument_letters_not_doubled(string argument1)
 {
-   	// char arr[27] = {'z', 'a', 'c', 'd', 'k', 'm', 'n', 'h', 'i', 'j', 'g', 'l', 'f', 'e', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'b', '\0'};;
-
-    char str1[27];
+    char str1[27]; // copy the argument passed in just to avoid mutating the original
     for (int i = 0; i < 27; i++)
     {
         str1[i] = argument1[i];
-        printf("%c", str1[i]);
     }
 
-    printf("\n");
+    char str1_lowercase[27]; // make lowercase so that the following sort will work
+    for (int i = 0; i < 27; i++)
+    {
+        str1_lowercase[i] = tolower(str1[i]);
+    }
 
     // sort array alphabetically
-	int counter = 27;
-	for (int i = 0; i < counter; i++)
-	{
-		for (int j = i; j < counter; j++)
-		{
-			if (str1[i] > str1[j])
-			{
-				char tempchar;
-				tempchar = str1[i];
-				str1[i] = str1[j];
-				str1[j] = tempchar;
-			}
-		}
-	}
-
-    for (int i = 0; i < 27; i++)
+    int counter = 26; // We use 26 and not 27 for the counter, because sorting the '\0' in causes problems.
+    for (int i = 0; i < counter; i++)
     {
-        printf("%c", str1[i]);
-    }
-    printf("\n");
-    for (int i = 0; i < 27; i++)
-    {
-        printf("%c", alphabet[i]);
-    }
-    printf("\n");
-
-    int blah = strcasecmp(str1, alphabet);
-    printf("%i\n", blah);
-
-    if (strcasecmp(str1, alphabet) == -97)
-    {
-        printf("ZZZ... Those are the same.\n");
-    }
-    else
-    {
-        printf("ZZZ... Those are different.\n");
+        for (int j = i; j < counter; j++)
+        {
+            if (str1_lowercase[i] > str1_lowercase[j])
+            {
+                char tempchar;
+                tempchar = str1_lowercase[i];
+                str1_lowercase[i] = str1_lowercase[j];
+                str1_lowercase[j] = tempchar;
+            }
+        }
     }
 
+    if (strcmp(str1_lowercase, alphabet) != 0) // compare the user string to our alphabet constant
+    {
+        return 1;
+    }
     return 0;
 }
 
-    // char argument1_lowercased[string_length + 1];
-    // for (int i = 0; i < string_length; i++)
-    // {
-    //     int tolower(char c);
-    // }
+void ciphered_text(string plaintext, string argument1)
+{
+    int plaintext_length = strlen(plaintext);
+    char plaintext_copy[plaintext_length];    // copy the plaintext passed in just to avoid mutating the original
+    for (int i = 0; i < plaintext_length; i++)
+    {
+        plaintext_copy[i] = plaintext[i];
+    }
 
+    char cipher_lowercase[27];
+    for (int i = 0; i < 27; i++)
+    {
+        cipher_lowercase[i] = tolower(argument1[i]);
+    }
 
+    char cipher_capitals[27];
+    for (int i = 0; i < 27; i++)
+    {
+        cipher_capitals[i] = toupper(argument1[i]);
+    }
 
-// take input argument and convert it all to lowercase...
-// sort array alphabetically (either by using characters or their numeric value)
-// then compare that sorted array to the default alphabet array, such that one can determine if each character appears only once
+    for (int i = 0; i < plaintext_length; i++)
+    {
+        for (int j = 0; j < 26; j++)
+        {
+            if (plaintext[i] == alphabet[j])
+            {
+                plaintext_copy[i] = cipher_lowercase[j];
+            }
+            else if (plaintext[i] == alphabet_capitals[j])
+            {
+                plaintext_copy[i] = cipher_capitals[j];
+            }
+        }
+    }
 
-
-
-
-
-
-
-
-// #include <cs50.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int check_argument_is_numeric(string argument1);
-// void print_ciper_text(string plain_text, int key_value);
-
-// int main(int argc, string argv[])
-// {
-
-
-
-
-//     string plain_text = get_string("plaintext:  ");
-//     int key_value = atoi(argv[1]);
-//     printf("ciphertext: ");
-//     print_ciper_text(plain_text, key_value);
-//     printf("\n");
-//     return 0;
-// }
-
-// void print_ciper_text(string plain_text, int key_value)
-// {
-//     int string_length = strlen(plain_text);
-//     int numeric_value_of_character = 0;
-//     for (int i = 0; i < string_length; i++)
-//     {
-//         numeric_value_of_character = (int) plain_text[i];
-//         if (numeric_value_of_character > 96 && numeric_value_of_character < 123) // lowercase characters
-//         {
-//             int result = (numeric_value_of_character - 97 + key_value) % 26;
-//             printf("%c", result + 97);
-//         }
-//         else if (numeric_value_of_character > 64 && numeric_value_of_character < 91) // uppercase characters
-//         {
-//             int result = (numeric_value_of_character - 65 + key_value) % 26;
-//             printf("%c", result + 65);
-//         }
-//         else // all other characters
-//         {
-//             printf("%c", numeric_value_of_character);
-//         }
-//     }
-// }
-
+    for (int i = 0; i < plaintext_length; i++)
+    {
+        printf("%c", plaintext_copy[i]);
+    }
+}
