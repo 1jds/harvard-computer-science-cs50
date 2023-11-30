@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: Having timed each of the sorting algorithms for each of the different lengths of reversed lists, I can see that sort2 was fastest in all reversed list cases, and that sort3 was faster than sort1 in all reversed list cases. This suggests that sort1 utilises a Bubble sort algorithm, because this was the slowest when dealing with reversed lists. This is because the worst-case scenario for Bubble sort is when we have a reversed array of values. In this scenario, the time complexity of Bubble sort (even if optimised with a swap-counter) will be O(n^2). Given that Selection sort is Θ(n^2), we might think that it would perform at the same speed as Bubble sort for the reversed lists. However, Selection sort has an advantage with perfectly reversed lists of values, because it will inadvertently solve for two values every time it finds a lowest value (e.g. on the first pass the largest value [at index 0] will conveniently trade places with the smallest value [at index n-1]). This means that it should perform at roughly twice the speed of Bubble sort in these particular instances. That is what I found when I timed the functions. (At this point, of course, I am assuming that sort3 was selection sort, rather than sort2, but more on the rationale for that assumption anon.)
+
+sort2 uses: Merge Sort
+
+How do you know?: Because it is the fastest in most cases, and all cases where the dataset was 50,000. This reflects the fact that it increasingly outperforms the other sort algorithms as n approaches infinity. This is to be expected, because while an optimised Bubble sort might be faster at sorting a short, already sorted list (Ω(n)), the Merge sort algorithm with Θ(n log n) should be faster at sorting a large array of values (particularly a random array) than either Bubble sort with O(n^2) or Selection sort with Θ(n^2).
+
+sort3 uses: Selection sort
+
+How do you know?: Process of elimination. Inferences from what has already been said above.
