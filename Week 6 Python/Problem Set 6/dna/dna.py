@@ -1,22 +1,17 @@
-# Works for Bob! But a lot of hard-coding I need to get rid of...
+# Removed hard-coding of input files, now need to work on hard-coding of subsequences...
 
 import csv
 import sys
 from typing import List, Dict
 
 def main():
-
-    # TODO: Check for command-line usage
+    # Check for command-line usage
     if not len(sys.argv) == 3 or not sys.argv[1][-4:] == ".csv" or not sys.argv[2][-4:] == ".txt":
         print("Usage: python dna.py data.csv sequence.txt")
 
-# $ python dna.py databases/small.csv sequences/1.txt
-# Lavender
-
-
-    # TODO: Read database file into a variable
+    # Read database file into a variable
     list_from_csv_file: List[Dict[str, int]] = []  # Or, as we would say in JavaScript, 'array'! With some typing here...
-    csv_file = open("databases/small.csv")
+    csv_file = open(sys.argv[1], "r", encoding="utf8")
     my_csv_reader_dictionary = csv.DictReader(csv_file)
 
     for row in my_csv_reader_dictionary:
@@ -30,8 +25,8 @@ def main():
     # print(list_from_csv_file)
     csv_file.close()
 
-    # TODO: Read DNA sequence file into a variable
-    individuals_sequence_file = open("sequences/1.txt", "r")
+    # Read DNA sequence file into a variable
+    individuals_sequence_file = open(sys.argv[2], "r", encoding="utf8")
     sequence_string = individuals_sequence_file.readline()
     # print(sequence_string)
     individuals_sequence_file.close()
