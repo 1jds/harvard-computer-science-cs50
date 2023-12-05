@@ -10,7 +10,7 @@ def main():
         or not sys.argv[1][-4:] == ".csv"
         or not sys.argv[2][-4:] == ".txt"
     ):
-        print("Usage: python dna.py data.csv sequence.txt")
+        sys.exit("Usage: python dna.py data.csv sequence.txt")
 
     # Read database .csv file into a list of dicts / array of objects
     list_from_csv_file: List[
