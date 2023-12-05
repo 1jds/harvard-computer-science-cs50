@@ -1,0 +1,19 @@
+Times:
+
+10 simulations: 0m0.031s
+100 simulations: 0m0.041s
+1000 simulations: 0m0.042s
+10000 simulations: 0m0.126s
+100000 simulations: 0m1.256s
+1000000 simulations: 0m9.838s
+
+Questions:
+
+Which predictions, if any, proved incorrect as you increased the number of simulations?:
+
+When only 10 simulations were run, the results were clearly inaccurate, because only 5 teams were shown as having any chance of winning. This is clearly wrong as all teams have some chance of winning. As the number of simulations increased, some countries (e.g. Japan, and Russia) were said to have a 0.0% chance of winning. This is obviously incorrect. However, it was only as the number of simulations increased that all 16 teams were included in the final list. As such, these were more accurate in that regard than the earlier simulations.
+
+Suppose you're charged a fee for each second of compute time your program uses.
+After how many simulations would you call the predictions "good enough"?:
+
+It seems like the predictions stabilized after about 1000
