@@ -54,26 +54,37 @@
 -- | 39 | Tracey Davis           | Slytherin  | Severus Snape      |
 -- | 40 | Vincent Crabbe         | Slytherin  | Severus Snape      |
 -- +----+------------------------+------------+--------------------+
+
 -- We are going to move the information in this one big table into two tables linked by a junction table
 
 -- The Students table...
-CREATE TABLE students (
+CREATE TABLE IF NOT EXISTS students (
     student_id INTEGER NOT NULL,
-    student_name TEXT NOT NULL,
+    student_name TEXT,
     PRIMARY KEY(student_id)
 );
 
 -- The Houses table
-CREATE TABLE houses (
-    house_id INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS houses (
     house_name TEXT NOT NULL,
-    house_head_name TEXT NOT NULL,
-    PRIMARY KEY(house_id)
+    house_head_name TEXT,
+    PRIMARY KEY(house_name)
 );
 
 -- The junction table for the above
-CREATE TABLE studentshouses (
-    students_houses_id INTEGER NOT NULL,
-    FOREIGN KEY(students_houses_id) REFERENCES students(student_id),
-    FOREIGN KEY(students_houses_id) REFERENCES houses(house_id)
+CREATE TABLE IF NOT EXISTS studentshouses (
+    student_id INTEGER NOT NULL,
+    house_id TEXT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students (student_id),
+    FOREIGN KEY (house_id) REFERENCES houses (house_name),
+    PRIMARY KEY (student_id, house_id)
 );
+
+
+-- These commands can be executed in the command line as follows:
+-- Go to the $ prompt (i.e. outside of sqlite>) and enter one of the following:
+-- 1. sqlite3 mydatabasename.db < filename.sql
+--                  OR
+-- 2. sqlite3 mydatabasename.db ".read filename.sql"
+--                  OR
+-- 3. cat filename.sql | sqlite3 mydatabasename.db
