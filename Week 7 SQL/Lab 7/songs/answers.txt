@@ -1,0 +1,22 @@
+Question 1.
+If songs.db contains the top 100 songs of one listener from 2018, how would you characterize their audio aura?
+
+If we run this command "SELECT AVG(valence), AVG(danceability), AVG(energy) FROM songs;" we get the following result:
++--------------+-------------------+-------------+
+| AVG(valence) | AVG(danceability) | AVG(energy) |
++--------------+-------------------+-------------+
+| 0.484443     | 0.71646           | 0.65906     |
++--------------+-------------------+-------------+
+Well, I'm not quite sure. A valence of 0.48 seems a little sad/downbeat.
+However, a danceability score of 0.72 seems more optimistic.
+Likewise, the 'energy' average of 0.66 doesn't quite match the valence.
+As such, I feel that I would have to describe this playlist as sad dance music.
+
+Question 2.
+Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener.
+What better ways of calculating this aura would you propose?
+
+Well, the information utilised above to make a determination about the listener's 'aura' didn't take into consideration
+the other aspects of the songs in the list such as their 'loudness', 'speechiness', 'tempo', duration, or factors beyond
+the scope of the data such as relative number of repeat listens, or whether the music was listened to ironically.
+I would propose taking into consideration a broader range of factors.
