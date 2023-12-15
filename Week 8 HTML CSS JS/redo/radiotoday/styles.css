@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root {
+    --radio-shack-red: #E84D39;
+    --radio-shack-orange: #FF4141;
+    --black: #000;
+}
+
+.logo-img {
+    max-width: 100px;
+}
+
+.bg-black {
+    background: var(--#000);
+}
+
+.radio-shack-red {
+    background-color: var(--radio-shack-red);
+}
+
+.stores {
+    width: 100%;
+    height: 500px;
+    background: var(--black);
+}
+
+.video-wrapper-wrapper {
+    width: 100%;
+    max-height: 70vmin;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.video-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    background: var(--black);
+    animation: whitetoblack ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes whitetoblack {
+    0% {
+        background: #fff;
+    }
+    100% {
+        background: var(--black);
+     }
+}
+
+.video-vid {
+    position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.our-story {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background: var(--black);
+}
+
+.parallax {
+    background-image: url("https://radioshack.com/wp-content/uploads/2023/06/TIENDA-STA-ANA.jpg");
+    background-attachment: fixed;
+    background-position: -75% 0%;
+    background-repeat: no-repeat;
+    background-size: 75% auto;
+}
+
+.our-story--parallax {
+    flex-basis: 0;
+    flex-grow: 2.15;
+}
+
+.our-story--parallax--dark-overlay {
+    min-width: 100%;
+    min-height: 100%;
+    background: rgba(0,0,0,0.91);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.our-story--parallax--overlay-text {
+    font-family: "Montserrat", Sans-serif;
+    font-size: 6.5rem;
+    font-weight: 700;
+    line-height: 6.5rem;
+    flex-basis: min-content;
+}
+
+.our-story--summary {
+    background: var(--black);
+    padding: 2rem 4rem;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.our-story--summary-logo {
+    max-width: 45%;
+    margin-bottom: 1rem;
+}
+
+.our-story--decorative-circle {
+    background: var(--black);
+    padding: 0rem 3rem;
+    display: flex;
+    align-items: center;
+}
+
+/* .from-left {
+    transform: translateX(-125%);
+    opacity: 0;
+}
+
+.from-right {
+    transform: translateX(125%);
+    opacity: 0;
+}
+
+.from-left,
+.from-right {
+    transition: transform 1.25s ease-in;
+    transition: opacity 1.25s ease-in;
+}
+
+.from-left.appear,
+.from-right.appear {
+    transform: translateX(0);
+    opacity: 1;
+} */
+
+
+
+/* How I was doing it for one item with animation and keyframes...
+I changed this to transition. */
+
+.appear-from-right {
+    animation: appearfromright 1.25s ease;
+}
+
+@keyframes appearfromright {
+    from {
+        opacity: 0;
+        transform: translateX(125%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+
+.appear-from-left {
+    animation: appearfromleft 1.25s ease;
+}
+
+@keyframes appearfromleft {
+    from {
+        opacity: 0;
+        transform: translateX(-125%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.team {
+    background: var(--black);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.team--video {
+    margin-left: 16.5%;
+    align-self: stretch;
+    display: flex;
+    gap: 1rem;
+}
+
+.team--video-left-flexbox {
+    max-width: 300px;
+}
+
+.montage-video-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.montage-vid {
+    width: 100%;
+    max-width: 700px;
+  }
+
+.team--heading {
+    padding-top: 3rem;
+    color: var(--radio-shack-orange);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+
+.team--tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 37px;
+    margin-bottom: 6rem;
+}
+
+.team--sub-tagline {
+    text-align: justify;
+    font-family: "Proximanova-regular", Sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.45rem;
+}
+
+.carousel-max-width {
+    max-width: 600px;
+}
+
+.team--final-word {
+    text-align: center;
+    font-family: "Proximanova-regular", Sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    max-width: 965px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    color: #060506;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+.footer-container {
+    padding: 1rem;
+    max-width: 1150px;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-family: "Arial", Sans-serif;
+    font-size: 0.8rem;
+}
+
+.footer-text {
+    text-align: left;
+    font-family: "Arial", Sans-serif;
+    font-size: 0.625rem;
+}
