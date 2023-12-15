@@ -3,11 +3,111 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Radioshack Quick Semi-Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="./styles.css" rel="stylesheet">
   </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <body class="text-light">
+    <nav class="navbar sticky-top navbar-expand-lg bg-black" data-bs-theme="dark">
+      <div class="container-md">
+        <a class="navbar-brand" href="#">
+          <img src="https://radioshack.com/wp-content/uploads/2023/06/Logo-RS.png" alt="radioshack logo" class="d-inline-block align-text-top logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Story</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Stores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Brand</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Products</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-danger" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section class="video-wrapper-wrapper">
+        <div class="video-wrapper">
+          <iframe class="video-vid" title="Radioshack video" src="https://player.vimeo.com/video/836332789?autoplay=1&amp;color&amp;autopause=0&amp;loop=1&amp;muted=1&amp;title=1&amp;portrait=1&amp;byline=1#t=" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+        </div>
+      </section>
+      <section class="our-story">
+        <div class="parallax our-story--parallax">
+          <div class="our-story--parallax--dark-overlay">
+            <p class="our-story--parallax--overlay-text slide-in-from-left">Our Story</p>
+          </div>
+        </div>
+        <div class="our-story--summary">
+          <img class="our-story--summary-logo" src="https://radioshack.com/wp-content/uploads/2023/06/Logo-RS.png" alt="radioshack logo">
+          <p>RadioShack is an American chain of consumer electronics stores since 1921.</p>
+          <p>In 1998 it began operations with Unicomer Group in Central America as a North American style store selling technology products and accessories.</p>
+          <p>In 2015, Unicomer Group acquired RadioShack International Brand, Intellectual Property and Franchise rights for Central America, South America, and the Caribbean.</p>
+          <p>In 2023, Unicomer Group acquired RadioShack‘s intellectual property assets and domains in about 70 countries around the world, including: the United States, Canada, Europe, and China; and aims to manage the business of technology products with excellence, generating long–term profitable relationships with our partners.</p>
+          <p>This acquisition consolidates Unicomer Group as the majority owner of the brand worldwide, leading the technology market and expanding its value offer for its clients.</p>
+          <p>We want to continue developing the business, in as many territories as possible, creating support plans for operations, reaching our customers with our broad portfolio of products, looking for the best prices and constant innovation to provide solutions to technological problems.</p>
+          <p>"A company is only as good as the people it has"</p>
+        </div>
+        <div class="our-story--decorative-circle">
+          <img class="slide-in-from-right" alt="decorative circle" src="https://radioshack.com/wp-content/uploads/2023/06/Recurso-3.png">
+        </div>
+      </section>
+      <section class="team">
+        <div class="team--video">
+          <div class="team--video-left-flexbox">
+            <h2 class="team--heading">Our Team</h2>
+            <p class="team--tagline">“A company is only as good as the people it has”</p>
+            <p class="team--sub-tagline">We believe in the power of teamwork. We know that when we combine our skills, knowledge and passion, we can achieve goals that seemed unattainable.</p>
+          </div>
+          <div class="montage-video-wrapper">
+            <iframe class="montage-vid" title="Radioshack products montage" src="https://player.vimeo.com/video/836332875?autoplay=1&amp;color&amp;autopause=0&amp;loop=1&amp;muted=1&amp;title=1&amp;portrait=1&amp;byline=1#t=" frameborder="0" allow="autoplay"></iframe>
+          </div>
+        </div>
+        <div class="team--carousel">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner carousel-max-width">
+              <div class="carousel-item active">
+                <img src="https://radioshack.com/wp-content/uploads/2023/07/DSC08786-scaled.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://radioshack.com/wp-content/uploads/2023/07/DSC08796-scaled.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://radioshack.com/wp-content/uploads/2023/07/DSC08826-scaled.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://radioshack.com/wp-content/uploads/2023/07/DSC08831-scaled.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team--final-word">
+          <p>Together, we form a resilient and committed team, ready to face any obstacle with determination. We seek learning opportunities, challenge limits and constantly reinvent ourselves. Every day is an opportunity to expand our horizons and discover new paths to success.</p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <p class="footer-copyright">© 2023 RadioShack</p>
+        <p class="footer-text">Our page is currently under construction. You can contact us through the mail: customerservice@radioshack.com. If you send us questions or comments through the enabled email, Unicomer Group (Millennium Plaza, Level 18. Paseo General Escalon, #3675. San Salvador, El Salvador) will process the personal data that you voluntarily provide us in this way. The purpose of the processing of your personal data is to respond to requests, proposals or claims that the user sends through the mail, on the basis of their consent, expressed when sending their mail. The data will be processed as long as they are necessary to answer your email or revoke your consent. You can revoke this consent at any time and free of charge, although this will not affect the legality of the treatments carried out previously. Your personal data will not be shared with third parties, unless you are obliged to provide them in compliance with any legal obligation. You can send a letter to the mail customerservice@radioshack.com, adequately proving your identity, at any time and free of charge, to: recall the consents granted, access your personal data, rectify inaccurate or incomplete data, request the deletion of your data, obtain the limitation of the processing of the data or request the portability of your data.</p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="radioshack.js"></script>
   </body>
 </html>
