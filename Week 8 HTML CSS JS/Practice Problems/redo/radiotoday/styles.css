@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* TO DO:
+1. Make the 'Our stores" heading zoom in
+2. put in the 'href's for whatever for the email and phone
+3. Make the world map fade in from opacity; 0
+4. Make the headphones slide in from left
+5. use a clamp to stop the 'Our products & innovations heading from getting too large at small screen sizes
+6. look generally at what breaks on smaller screen sizes - responsiveness...
+7. Move on from cloning this poorly designed site!
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Roboto&display=swap');
 
 :root {
     --radio-shack-red: #E84D39;
@@ -21,7 +31,6 @@
 .radio-shack-red {
     background-color: var(--radio-shack-red);
 }
-
 
 .video-wrapper-wrapper {
     width: 100%;
@@ -117,33 +126,6 @@
     align-items: center;
 }
 
-/* .from-left {
-    transform: translateX(-125%);
-    opacity: 0;
-}
-
-.from-right {
-    transform: translateX(125%);
-    opacity: 0;
-}
-
-.from-left,
-.from-right {
-    transition: transform 1.25s ease-in;
-    transition: opacity 1.25s ease-in;
-}
-
-.from-left.appear,
-.from-right.appear {
-    transform: translateX(0);
-    opacity: 1;
-} */
-
-
-
-/* How I was doing it for one item with animation and keyframes...
-I changed this to transition. */
-
 .appear-from-right {
     animation: appearfromright 1.25s ease;
 }
@@ -190,7 +172,6 @@ I changed this to transition. */
 .team--decorative-dots-up {
     rotate: 90deg;
 }
-
 
 .team--video {
     margin-left: 16.5%;
@@ -254,6 +235,7 @@ I changed this to transition. */
     max-width: 600px;
 }
 
+
 .team--final-word {
     text-align: center;
     font-family: "Proximanova-regular", Sans-serif;
@@ -314,20 +296,165 @@ I changed this to transition. */
     max-width: 300px;
 }
 
-.stores--img {
+.stores--carousel-max-width {
+    max-width: 700px;
+    max-height: 510px;
+}
+
+.brand {
+    background: var(--black);
+    padding: 6rem 0rem 2rem 0rem;
+}
+
+.brand--container {
+    margin-inline: auto;
     max-width: 700px;
 }
 
-/*
-    <div class="stores--img-div">
-        <p class="stores--our-stores-callout">Our stores</p>
-        <img class="stores--img" src="https://radioshack.com/wp-content/uploads/2023/07/METROCENTRO-ESA-20230718-145900.jpg" alt="a radioshack store interior">
-    </div>
-</section> */
+.brand--heading {
+    color: var(--radio-shack-orange);
+    font-family: "Montserrat", Sans-serif;
+    font-weight: 600;
+}
 
+.brand--img {
+    max-width: 100%;
+}
 
+.products {
+    background: #E84D39;
+    width: 100%;
+}
 
+.products--grid-container {
+    margin-inline: auto;
+    display: grid;
+    width: calc(100% - 60px);
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, calc(100vw / 12));
+}
 
+.products--first-white-oval {
+    grid-area: 3/2/5/12;
+    border-radius: 200px;
+    background: #FFF;
+}
+
+.products--carousel {
+    grid-area: 1/3/3/11;
+}
+
+.products--wording {
+    grid-area: 6/3/7/10;
+    color: #FFF;
+    font-family: "Poppins", Sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 58px;
+    text-align: center;
+    z-index: 1;
+}
+
+.products--headphones {
+    grid-area: 6/1/13/5;
+    /* max-width: 450px; */
+    max-width: 100%;
+}
+
+.products--video-wrapper {
+    grid-area: 7/6/11/12;
+    margin-top: 4rem;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.products--video {
+    width: 100%;
+    /* max-width: 700px; */
+}
+
+.products--second-white-oval {
+    grid-area: 7/1/11/13;
+    border-radius: 200px;
+    background: #FFF;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+}
+
+.slide-up {
+    background: var(--black);
+    animation: slidefrombottom 1.5s ease;
+}
+
+@keyframes slidefrombottom {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+
+.contact-us {
+    padding: 3rem;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.contact-us--heading {
+    text-align: center;
+    color: #FFF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 68px;
+    max-width: 750px;
+}
+
+.contact-us--methods {
+    display: flex;
+    gap: 3rem;
+}
+.contact-us--methods > a {
+    font-family: "Roboto", Sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.contact-us--tagline {
+    text-align: center;
+    color: #FFF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 33px;
+    max-width: 300px;
+}
+
+.contact-us--links {
+    width: 75%;
+    color: #c36;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Proximanova-regular", Sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contact-us--logo {
+    margin-top: 3rem;
+    max-width: 200px;
+}
+
+.contact-us--icons {
+    vertical-align: middle;
+    max-width: 2.5rem;
+    margin-right: 0.5rem;
+}
 
 footer {
     display: flex;
