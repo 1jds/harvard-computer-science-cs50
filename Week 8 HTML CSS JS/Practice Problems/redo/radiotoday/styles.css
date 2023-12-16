@@ -6,6 +6,10 @@
     --black: #000;
 }
 
+.navbar--in-line-margin {
+    margin-inline: 6.25rem;
+}
+
 .logo-img {
     max-width: 100px;
 }
@@ -18,11 +22,6 @@
     background-color: var(--radio-shack-red);
 }
 
-.stores {
-    width: 100%;
-    height: 500px;
-    background: var(--black);
-}
 
 .video-wrapper-wrapper {
     width: 100%;
@@ -49,17 +48,17 @@
     }
     100% {
         background: var(--black);
-     }
+    }
 }
 
 .video-vid {
     position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .our-story {
@@ -178,6 +177,7 @@ I changed this to transition. */
 }
 
 .team {
+    position: relative;
     background: var(--black);
     padding: 3rem;
     display: flex;
@@ -186,6 +186,11 @@ I changed this to transition. */
     align-items: center;
     gap: 3rem;
 }
+
+.team--decorative-dots-up {
+    rotate: 90deg;
+}
+
 
 .team--video {
     margin-left: 16.5%;
@@ -198,6 +203,19 @@ I changed this to transition. */
     max-width: 300px;
 }
 
+.fade-in {
+    animation: fadein 1.25s ease;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .montage-video-wrapper {
     display: flex;
     flex: 1 1 auto;
@@ -206,7 +224,7 @@ I changed this to transition. */
 .montage-vid {
     width: 100%;
     max-width: 700px;
-  }
+}
 
 .team--heading {
     padding-top: 3rem;
@@ -243,7 +261,73 @@ I changed this to transition. */
     font-weight: 400;
     line-height: 1.6rem;
     max-width: 965px;
+    z-index: 1;
 }
+
+.team--decorative-dots-down {
+    rotate: -90deg;
+    position: absolute;
+    left: 25%;
+    bottom: 40%;
+}
+
+.team--decorative-red-circle {
+    position: absolute;
+    bottom: 3rem;
+    left: 4rem;
+}
+
+.stores {
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+.stores--heading {
+    color: var(--radio-shack-orange);
+    font-family: "Montserrat", Sans-serif;
+    font-weight: 600;
+}
+
+.stores--sub-heading {
+    color: #FFF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.stores--img-div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stores--our-stores-callout {
+    color: #FFF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 3.75rem;
+    font-weight: 600;
+    line-height: 3.75rem;
+    max-width: 300px;
+}
+
+.stores--img {
+    max-width: 700px;
+}
+
+/*
+    <div class="stores--img-div">
+        <p class="stores--our-stores-callout">Our stores</p>
+        <img class="stores--img" src="https://radioshack.com/wp-content/uploads/2023/07/METROCENTRO-ESA-20230718-145900.jpg" alt="a radioshack store interior">
+    </div>
+</section> */
+
+
+
+
 
 footer {
     display: flex;

@@ -1,50 +1,25 @@
-const rightSliders = document.querySelectorAll('.slide-in-from-right')
+const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+}
 
-const fromRightOnScrollObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const scrollObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting && entry.target.classList.contains('slide-in-from-right')) {
             entry.target.classList.add('appear-from-right')
         }
-    })
-})
-
-rightSliders.forEach(rightSlider => {
-    fromRightOnScrollObserver.observe(rightSlider)
-})
-
-
-
-
-
-const leftSliders = document.querySelectorAll('.slide-in-from-left')
-
-const fromLeftOnScrollObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        else if (entry.isIntersecting && entry.target.classList.contains('slide-in-from-left')) {
             entry.target.classList.add('appear-from-left')
         }
+        else if (entry.isIntersecting && entry.target.classList.contains('will-fade-in')) {
+            entry.target.classList.add('fade-in')
+        }
     })
+}, options)
+
+const itemsToAnimate = document.querySelectorAll('.slide-in-from-right, .slide-in-from-left, .will-fade-in').forEach(item => {
+    scrollObserver.observe(item)
 })
 
-leftSliders.forEach(leftSlider => {
-    fromLeftOnScrollObserver.observe(leftSlider)
-})
 
-
-
-
-// This is how I had it before...
-// const observer = new IntersectionObserver(entries => {
-//     console.log(entries)
-//     // Loop over the entries
-//     entries.forEach(entry => {
-//         // If the element is visible
-//         if (entry.isIntersecting) {
-//         // Add the animation class
-//             entry.target.classList.add('our-story--decorative-circle-img-animation');
-//         }
-//     });
-//     }
-// );
-
-// observer.observe(document.querySelector('.our-story--decorative-circle-img'));
