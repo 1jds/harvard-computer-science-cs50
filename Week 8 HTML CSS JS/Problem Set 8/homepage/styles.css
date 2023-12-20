@@ -1,0 +1,9 @@
+body {
+    /* background: rgb(43, 48, 53); */
+    background: pink;
+    background: var(--bs-warning);
+}
+
+.nav--brand-anchor {
+    max-width: 50px;
+}
