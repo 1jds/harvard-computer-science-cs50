@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/" method="post">
+                    <input autocomplete="off" type="text" name="name" placeholder="Name">
+                    <input autocomplete="off" type="text" name="month" placeholder="Month">
+                    <input autocomplete="off" type="text" name="day" placeholder="Day">
+                    <button type="submit">Add Birthday</button>
+                </form>
+                <h2>Edit a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/" method="post">
+                    <input autocomplete="off" type="text" placeholder="Name">
+                    <input autocomplete="off" type="text" placeholder="Month">
+                    <input autocomplete="off" type="text" placeholder="Day">
+                    <button type="submit">Add Birthday</button>
+                </form>
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for person in birthdays_list %}
+                            <tr>
+                                <td>{{ person.id }}</td>
+                                <td>{{ person.name }}</td>
+                                <td>{{ person.month }}/{{ person.day }}</td>
+                                <td><button class="close-btn" value="{{ person.id }}" id="submitButton"><img class="close-icon" src="../static/close-icon.svg" alt="delete birthday"></button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <script>
+        let myBtns = document.querySelectorAll("#submitButton")
+        myBtns.forEach((item, index) => {
+            let formData = new FormData() // creates a form object
+            formData.append("id", item.value) // appends a field
+            item.addEventListener("click", () => {
+                let xhr = new XMLHttpRequest()
+                xhr.open("POST", "/delete")
+                xhr.send(formData)
+                let response
+                xhr.onload = () => response = xhr.response
+                console.log("THE RESPONSE IS...", response)
+                window.location.assign(response)
+                // See https://javascript.info/xmlhttprequest for how to do this (and for why you should use fetch instead!)
+            })
+        })
+    </script>
+    </body>
+</html>
