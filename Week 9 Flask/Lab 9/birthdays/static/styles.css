@@ -6,6 +6,7 @@ body {
     line-height: 1.5;
     margin: 0;
     text-align: left;
+    font-family: system-ui, sans-serif;
 }
 
 .container {
@@ -40,6 +41,10 @@ body {
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 48px;
+}
+
+button {
+    cursor: pointer;
 }
 
 button, input[type="submit"] {
@@ -83,8 +88,4 @@ tbody tr:nth-of-type(odd) {
 
 .close-icon {
     vertical-align: middle;
-}
-
-.close-btn {
-    cursor: pointer;
 }
