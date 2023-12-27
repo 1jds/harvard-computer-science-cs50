@@ -21,3 +21,37 @@ CREATE TABLE companies (
   company_name TEXT NOT NULL
 );
 
+2. Totals Table...
+CREATE TABLE totals (
+  user_id INTEGER PRIMARY KEY NOT NULL,
+  company_id INTEGER NOT NULL,
+  total INTEGER NOT NULL,
+  FOREIGN KEY (user_id)
+     REFERENCES users (id),
+  FOREIGN KEY (company_id)
+     REFERENCES companies (company_id)
+);
+
+3. Transactions Table...
+CREATE TABLE transcations (
+  user_id INTEGER PRIMARY KEY,
+  company_id INTEGER NOT NULL,
+  number_transacted INTEGER NOT NULL,
+  transaction_price REAL NOT NULL,
+  date_transacted INTEGER NOT NULL,
+  FOREIGN KEY (user_id)
+     REFERENCES users (id),
+  FOREIGN KEY (company_id)
+     REFERENCES companies (company_id)
+);
+
+
+HOW TO INSERT DATES...
+db.execute(
+"INSERT INTO transactions (user_id, company_id, number_transacted, transaction_price, date_transacted) VALUES (?, ?, ?, ?, unixepoch(?))", 
+A,
+B,
+C,
+D,
+"2023-12-28 03:11:14",
+)
