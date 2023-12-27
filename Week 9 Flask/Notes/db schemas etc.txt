@@ -33,7 +33,7 @@ CREATE TABLE totals (
 );
 
 3. Transactions Table...
-CREATE TABLE transcations (
+CREATE TABLE transactions (
   user_id INTEGER PRIMARY KEY,
   company_id INTEGER NOT NULL,
   number_transacted INTEGER NOT NULL,
@@ -47,11 +47,14 @@ CREATE TABLE transcations (
 
 
 HOW TO INSERT DATES...
+import datetime
+
 db.execute(
 "INSERT INTO transactions (user_id, company_id, number_transacted, transaction_price, date_transacted) VALUES (?, ?, ?, ?, unixepoch(?))", 
 A,
 B,
 C,
 D,
-"2023-12-28 03:11:14",
+"2023-12-28 03:11:14" // datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
 )
+
