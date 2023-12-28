@@ -23,7 +23,8 @@ CREATE TABLE companies (
 
 2. Totals Table...
 CREATE TABLE totals (
-  user_id INTEGER PRIMARY KEY NOT NULL,
+  total_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  user_id INTEGER NOT NULL,
   company_id INTEGER NOT NULL,
   total INTEGER NOT NULL,
   FOREIGN KEY (user_id)
@@ -34,7 +35,8 @@ CREATE TABLE totals (
 
 3. Transactions Table...
 CREATE TABLE transactions (
-  user_id INTEGER PRIMARY KEY,
+  transaction_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  user_id INTEGER NOT NULL,
   company_id INTEGER NOT NULL,
   number_transacted INTEGER NOT NULL,
   transaction_price REAL NOT NULL,
@@ -57,4 +59,6 @@ C,
 D,
 "2023-12-28 03:11:14" // datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
 )
+
+See line 97 for 'index out of range' (i.e. my line 94 company_id = db.execute...) produces an empty list because the ticker someone is trying to buy for isn't in my db list...
 
