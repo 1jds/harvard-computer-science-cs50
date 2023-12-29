@@ -53,16 +53,20 @@ def index():
             "SELECT * FROM companies WHERE company_id = ?",
             item["company_id"],
         )
-        # print("DOING SOME DIAGNOSTICS HERE...", type(lookup(company_info[0]["ticker"])), lookup(company_info[0]["ticker"]), type(item["total"]), item["total"])
         new_item["symbol"] = company_info[0]["ticker"]
         new_item["company"] = company_info[0]["company_name"]
         new_item["shares"] = item["total"]
-        new_item["curr_price"] = lookup(company_info[0]["ticker"])["price"] # TypeError: 'NoneType' object is not subscriptable...
+        new_item["curr_price"] = lookup(company_info[0]["ticker"])["price"]
         new_item["total_price"] = new_item["curr_price"] * item["total"]
         overall_portfolio_value += new_item["total_price"]
         new_item["total_price"] = usd(new_item["total_price"])
         updated_totals.append(new_item)
-    return render_template("portfolio.html", totals = updated_totals, user_cash = usd(user_curr_cash[0]["cash"]), portfolio_value = usd(overall_portfolio_value))
+    return render_template(
+        "portfolio.html",
+        totals=updated_totals,
+        user_cash=usd(user_curr_cash[0]["cash"]),
+        portfolio_value=usd(overall_portfolio_value),
+    )
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -75,7 +79,10 @@ def buy():
             int(request.form.get("shares"))
             is_int = True
         except ValueError as ex:
-            print('"%s" cannot be converted to an int: %s' % (request.form.get("shares"), ex))
+            print(
+                '"%s" cannot be converted to an int: %s'
+                % (request.form.get("shares"), ex)
+            )
         if not is_int:
             return apology("non-numeric shares", 400)
         elif not (int(request.form.get("shares"))).is_integer():
@@ -87,29 +94,38 @@ def buy():
         else:
             number_to_buy = int(request.form.get("shares"))
             current_price = lookup(request.form.get("symbol"))
-            current_user_cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
-            if current_user_cash[0]["cash"] - number_to_buy * current_price["price"] < 0:
+            current_user_cash = db.execute(
+                "SELECT cash FROM users WHERE id = ?", session["user_id"]
+            )
+            if (
+                current_user_cash[0]["cash"] - number_to_buy * current_price["price"]
+                < 0
+            ):
                 return apology("can't afford", 400)
             else:
-                company_id = db.execute("SELECT company_id FROM companies WHERE ticker = ?", current_price["symbol"])
+                company_id = db.execute(
+                    "SELECT company_id FROM companies WHERE ticker = ?",
+                    current_price["symbol"],
+                )
                 if not company_id:
                     db.execute(
                         "INSERT INTO companies (ticker, company_name) VALUES (?, ?)",
                         current_price["symbol"],
                         current_price["name"],
                     )
-                    company_id = db.execute("SELECT company_id FROM companies WHERE ticker = ?", current_price["symbol"])
-                print("\n\n AM LOOKING AT THIS RIGHT NOW... \n\n", company_id, current_user_cash, current_price)
-                    #  AM LOOKING AT THIS RIGHT NOW...
-                    #  [] [{'cash': 5711.099999999999}] {'name': 'B', 'price': 32.85, 'symbol': 'B'}
+                    company_id = db.execute(
+                        "SELECT company_id FROM companies WHERE ticker = ?",
+                        current_price["symbol"],
+                    )
+
                 # 1. execute an update on the users table to change 'cash' to be the new reduced amount
                 db.execute(
                     "UPDATE users SET cash = ?",
-                    current_user_cash[0]["cash"] - number_to_buy * current_price["price"],
+                    current_user_cash[0]["cash"]
+                    - number_to_buy * current_price["price"],
                 )
                 # 2. execute an insert into the transactions table to add the details of the present purchase of stocks
                 unixepoch = int(time.time())
-                print("HERE IS THE UNIX EPOCH.........", unixepoch)
                 db.execute(
                     "INSERT INTO transactions (user_id, company_id, number_transacted, transaction_price, date_transacted) VALUES (?, ?, ?, ?, ?)",
                     session["user_id"],
@@ -118,11 +134,11 @@ def buy():
                     current_price["price"],
                     unixepoch,
                 )
-                # 3. execute an insert/update on the totals table to add/update the total number of stocks owned by the present user of the type/symbol in the current transaction
+                # 3. insert/update totals table to update the total number of current transaction stocks owned by the user
                 curr_totals_for_session_user = db.execute(
                     "SELECT * FROM totals WHERE user_id = ? AND company_id = ?",
                     session["user_id"],
-                    company_id[0]["company_id"]
+                    company_id[0]["company_id"],
                 )
                 if curr_totals_for_session_user:
                     db.execute(
@@ -148,8 +164,7 @@ def buy():
 def history():
     """Show history of transactions"""
     transactions_history = db.execute(
-        "SELECT * FROM transactions WHERE user_id = ?",
-        session["user_id"]
+        "SELECT * FROM transactions WHERE user_id = ?", session["user_id"]
     )
     updated_transactions_history = []
     for item in transactions_history:
@@ -162,9 +177,13 @@ def history():
         new_item["company"] = company_info[0]["company_name"]
         new_item["shares"] = item["number_transacted"]
         new_item["price"] = item["transaction_price"]
-        new_item["date"] = datetime.datetime.utcfromtimestamp(item["date_transacted"]).strftime('%Y-%m-%d %H:%M:%S')
+        new_item["date"] = datetime.datetime.utcfromtimestamp(
+            item["date_transacted"]
+        ).strftime("%Y-%m-%d %H:%M:%S")
         updated_transactions_history.append(new_item)
-    return render_template("history.html", transactions_history = updated_transactions_history)
+    return render_template(
+        "history.html", transactions_history=updated_transactions_history
+    )
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -176,7 +195,6 @@ def login():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
         # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 403)
@@ -186,10 +204,14 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute(
+            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+        )
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(
+            rows[0]["hash"], request.form.get("password")
+        ):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -223,14 +245,25 @@ def quote():
             return apology("must provide a symbol for lookup", 400)
         else:
             quote_info = lookup(request.form.get("symbol"))
-            print(quote_info)
-            # print(quote_info) // expected return value e.g. {'name': 'NFLX', 'price': 489.95, 'symbol': 'NFLX'}
             if quote_info:
-                name = db.execute("SELECT company_name FROM companies WHERE ticker = ?", quote_info["symbol"])
+                name = db.execute(
+                    "SELECT company_name FROM companies WHERE ticker = ?",
+                    quote_info["symbol"],
+                )
                 if name:
-                    return render_template("quoted.html", company_name=name[0]["company_name"], company_symbol=quote_info["symbol"], current_price=usd(quote_info["price"]))
+                    return render_template(
+                        "quoted.html",
+                        company_name=name[0]["company_name"],
+                        company_symbol=quote_info["symbol"],
+                        current_price=usd(quote_info["price"]),
+                    )
                 else:
-                    return render_template("quoted.html", company_name=quote_info["symbol"], company_symbol=quote_info["symbol"], current_price=usd(quote_info["price"]))
+                    return render_template(
+                        "quoted.html",
+                        company_name=quote_info["symbol"],
+                        company_symbol=quote_info["symbol"],
+                        current_price=usd(quote_info["price"]),
+                    )
             else:
                 return apology("invalid symbol", 400)
     else:
@@ -242,7 +275,6 @@ def register():
     """Register user"""
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
         # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 400)
@@ -254,7 +286,9 @@ def register():
                 username_has_no_alnum = False
                 break
         if username_has_no_alnum:
-            return apology("username must contain at least one alphanumeric character", 400)
+            return apology(
+                "username must contain at least one alphanumeric character", 400
+            )
 
         # Ensure password was submitted
         elif not request.form.get("password"):
@@ -269,7 +303,9 @@ def register():
             return apology("the password did not match the confirmation", 400)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute(
+            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+        )
 
         # Ensure username does not exist already
         if len(rows) >= 1:
@@ -295,7 +331,7 @@ def sell():
     """Sell shares of stock"""
     user_stocks = db.execute(
         "SELECT total, ticker FROM totals JOIN companies ON companies.company_id = totals.company_id WHERE user_id = ?",
-        session["user_id"]
+        session["user_id"],
     )
     dict_of_stocks = {}
     for stock in user_stocks:
@@ -308,22 +344,23 @@ def sell():
             return apology("no shares matching symbol", 400)
         elif not int(request.form.get("shares")) > 0:
             return apology("enter a positive integer", 400)
-        elif not dict_of_stocks[request.form.get("symbol")] >= int(request.form.get("shares")):
+        elif not dict_of_stocks[request.form.get("symbol")] >= int(
+            request.form.get("shares")
+        ):
             return apology("insufficient shares to sell", 400)
         else:
-            # THIS IS ALL COPIED AND NEEDS EDITING
             curr_stock_and_user_info = db.execute(
                 "SELECT total_id, user_id, companies.company_id, total, ticker, company_name, username, cash FROM totals JOIN companies ON companies.company_id = totals.company_id JOIN users ON users.id = totals.user_id WHERE user_id = ? AND ticker = ?",
                 session["user_id"],
                 request.form.get("symbol"),
             )
             number_to_sell = int(request.form.get("shares"))
-            print("\n\n THE NUMBER TO SELL FOLLOWS HEREAFTER... \n\n", number_to_sell)
             current_price = lookup(request.form.get("symbol"))
             # 1. execute an update on the users table to change 'cash' to be the new increased amount
             db.execute(
                 "UPDATE users SET cash = ?",
-                curr_stock_and_user_info[0]["cash"] + number_to_sell * current_price["price"],
+                curr_stock_and_user_info[0]["cash"]
+                + number_to_sell * current_price["price"],
             )
             # 2. execute an insert into the transactions table to add the details of the present sale of stocks
             unixepoch = int(time.time())
@@ -331,12 +368,12 @@ def sell():
                 "INSERT INTO transactions (user_id, company_id, number_transacted, transaction_price, date_transacted) VALUES (?, ?, ?, ?, ?)",
                 session["user_id"],
                 curr_stock_and_user_info[0]["company_id"],
-                 0 - number_to_sell,
+                0 - number_to_sell,
                 current_price["price"],
                 unixepoch,
             )
 
-            # 3. execute an update/delete on the totals table to add/update the total number of stocks owned by the present user of the type/symbol in the current transaction
+            # 3. update/delete the totals table for the total number of stocks owned by the present user of the current type
             if number_to_sell == curr_stock_and_user_info[0]["total"]:
                 db.execute(
                     "DELETE FROM totals WHERE total_id = ?",
@@ -349,14 +386,5 @@ def sell():
                     curr_stock_and_user_info[0]["total_id"],
                 )
             return redirect("/")
-            # THIS IS ALL COPIED AND NEEDS EDITING
     else:
         return render_template("sell.html", options=user_stocks)
-# symbol shares
-# [
-#  {'total': 1, 'ticker': 'A'},
-#  {'total': 5, 'ticker': 'AA'},
-#  {'total': 150, 'ticker': 'F'}
-# ]
-
-# I NEED TO DELETE ITEMS FROM THE TOTALS TABLE IF THEY ARE ALL SOLD....
