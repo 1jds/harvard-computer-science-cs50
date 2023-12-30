@@ -1,9 +1,56 @@
+:root {
+    --emphasis-green: #;
+}
+
 body {
-    /* background: rgb(43, 48, 53); */
-    background: pink;
-    background: var(--bs-warning);
+    background: #2b3035;
 }
 
 .nav--brand-anchor {
     max-width: 50px;
+}
+
+#navbar--logo:hover {
+    filter: invert(0.18) sepia(1) saturate(20) hue-rotate(43.2deg) brightness(0.75);
+}
+
+main:has(.intro) {
+    padding: 3rem 15rem;
+}
+
+[data-test-selector="true"] {
+    color: #1c9e62;
+    font-family: monospace;
+}
+
+.heading-text {
+    font-size: 5rem;
+    font-weight: semi-bold;
+}
+
+.heading-text-first {
+    color: rgba(248, 249, 250, 0.85);
+}
+
+.heading-text-second {
+    color: rgba(248, 249, 250, 0.5);
+}
+
+.heading-text-description {
+    font-size: 1.5rem;
+    max-width: 700px;
+    color: rgba(248, 249, 250, 0.5);
+}
+
+.big-btn {
+    padding: 1.5rem;
+}
+
+footer {
+    background: #191c1f;
+}
+
+.footer--footer-text {
+    max-width: 600px;
+    margin-inline: auto;
 }
