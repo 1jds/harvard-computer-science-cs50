@@ -14,6 +14,10 @@ body {
     filter: invert(0.18) sepia(1) saturate(20) hue-rotate(43.2deg) brightness(0.75);
 }
 
+.navbar--links-list button {
+    margin-left: 1rem;
+}
+
 main:has(.intro) {
     padding: 3rem 15rem;
 }
