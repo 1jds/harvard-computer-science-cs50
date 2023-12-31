@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>Simple Bootstrap 5 Portfolio</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top" data-bs-theme="dark">
+            <div class="container-fluid py-4 px-5">
+              <a class="navbar-brand me-auto nav--brand-anchor" aria-label="link to free code camp user page" href="https://www.freecodecamp.org/computerprogram" target="_blank">
+                <img id="navbar--logo" src="/assets/jds-logo.svg" alt="jds logo" width="100%">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar--links-list">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="./index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="./index.html">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./experience.html">Experience</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./work.html">Work</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./contact.html">Contact</a>
+                  </li>
+                  <button id="little-green-btn" class="btn btn-outline-success fw-semibold" type="button">Resume</button>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <main class="container-fluid text-light bg-body-tertiary" data-bs-theme="dark">
+          <div class="intro">
+            <p class="fs-4" data-test-selector="true">
+                Over the years,
+            </p>
+            <div class="experience-paras">
+                <p>Here is a list of experience I copied-and-pasted from another website. It's not real. It's just advanced lorem ipsum text...</p>
+                <p>"I've built products for companies and businesses around the globe ranging from marketing websites to complex solutions and enterprise apps with focus on fast, elegant and accessible user experiences.</p>
+
+<p>Currently, I work at Shopify as a Senior Frontend Engineer crafting thoughtful and inclusive experiences that adhere to web standards for over 3 million merchants across the world.</p>
+
+<p>Before now, I was Principal Frontend Engineer at hellotax, where I worked on a suite of tools and services tailored towards automated VAT compliance for multi-channel sellers in Europe.</p>
+
+<p>Prior to hellotax, I was Senior frontend engineering consultant with Pixel2HTML, building JavaScript applications and interfaces for orgs and individuals.</p>
+
+<p>I once also led the frontend team at Conectar, an e-learning startup through building multiple React applications into a single robust learning platform."</p>
+            </div>
+          </div>
+        </main>
+        <footer class="p-4 small text-center text-light" data-bs-theme="dark">
+          <p class="footer--footer-text">
+            This is a quick practice 'homepage' done as homework and made with plain HTML, some CSS, Bootstrap, and JavaScript. For a proper example of a more interactive website built by the author but with React and other technologies, see <a href="http://js-ga-assets.s3-website-ap-southeast-2.amazonaws.com/poems" target="_blank">this demo site</a>.
+          </p>
+      </footer>
+      <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
