@@ -1,14 +1,23 @@
 import { useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
+import Landing from "./Landing";
+import classroom from "./assets/hiroyoshi-urushima-vfRkE_9wuPo-unsplash.jpg";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Landing />
+      {/* <Navbar /> */}
       <main className="content-grid">
-        <h1>Hello World!</h1>
-        <p>
+        {/* <img
+          // className="full-width full-cover overlayed"
+          className="mobile-landing"
+          src={classroom}
+          alt="Japanese school room"
+        /> */}
+        <h1 className="overlayed">Hello World!</h1>
+        {/* <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
           sapiente fugiat asperiores nisi dicta voluptates ea quasi, atque
           minima, aspernatur iste nesciunt aliquam! Iusto iure eveniet explicabo
@@ -43,7 +52,7 @@ function App() {
           ipsam, asperiores adipisci nostrum, nihil mollitia perspiciatis
           necessitatibus non at quibusdam deleniti sunt quos. Dignissimos, vel
           dolore voluptatibus cum est alias molestias iusto eos voluptatum.
-        </p>
+        </p> */}
       </main>
     </>
   );

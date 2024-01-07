@@ -114,3 +114,29 @@ img.full-width {
   max-height: 45vh;
   object-fit: cover;
 }
+
+img.full-cover {
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.overlayed {
+  grid-area: a;
+}
+
+h1.overlayed {
+  display: grid;
+  place-content: center;
+}
+
+main {
+  background: url(./assets/hiroyoshi-urushima-vfRkE_9wuPo-unsplash.jpg)
+    no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
